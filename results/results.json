@@ -1,0 +1,171 @@
+{
+  "n_total": 720,
+  "n_train": 576,
+  "n_test": 144,
+  "positive_rate": 0.5,
+  "unit_tests": [
+    {
+      "test": "train/test indices disjoint",
+      "passed": true
+    },
+    {
+      "test": "no NaNs in engineered features",
+      "passed": true
+    },
+    {
+      "test": "target is strictly binary {0,1}",
+      "passed": true
+    },
+    {
+      "test": "base and engineered splits share identical row order",
+      "passed": true
+    },
+    {
+      "test": "engineered features are deterministic row-wise functions of base features (no leakage)",
+      "passed": true
+    },
+    {
+      "test": "train and test class balance within 5 points of each other",
+      "passed": true
+    }
+  ],
+  "cv_summary_50fold": {
+    "Logistic Regression": {
+      "mean_auc": 0.89227962395088,
+      "std_auc": 0.030575678204021343,
+      "mean_f1": 0.8334629381686659,
+      "std_f1": 0.03322713315876462
+    },
+    "Baseline XGBoost (Wk3)": {
+      "mean_auc": 0.907571395790308,
+      "std_auc": 0.02496823373004356,
+      "mean_f1": 0.8339908320052446,
+      "std_f1": 0.029449759728613897
+    },
+    "Tuned XGBoost (Wk4)": {
+      "mean_auc": 0.9098125317256678,
+      "std_auc": 0.0243263551311477,
+      "mean_f1": 0.8390238443048649,
+      "std_f1": 0.028980703325268444
+    }
+  },
+  "ab_test": {
+    "tuned_vs_baseline_xgb": {
+      "mean_auc_diff": 0.002241135935359795,
+      "t_stat": 1.5434425204868811,
+      "p_value": 0.13356673952822498
+    },
+    "tuned_vs_logreg": {
+      "mean_auc_diff": 0.017532907774787776,
+      "t_stat": 5.640411240222807,
+      "p_value": 4.28933560670991e-06
+    }
+  },
+  "holdout_test": {
+    "auc": 0.9054783950617283,
+    "f1": 0.8275862068965517,
+    "precision": 0.821917808219178,
+    "recall": 0.8333333333333334,
+    "accuracy": 0.8263888888888888
+  },
+  "confusion_matrix": [
+    [
+      59,
+      13
+    ],
+    [
+      12,
+      60
+    ]
+  ],
+  "error_analysis": {
+    "n_errors": 25,
+    "n_false_positive": 13,
+    "n_false_negative": 12,
+    "n_borderline_errors_within_0.1_of_threshold": 5,
+    "n_confident_errors_over_0.35_from_threshold": 6,
+    "mean_feature_values_false_negative": {
+      "age": 43.0,
+      "sex": 1.0,
+      "cp": 3.0,
+      "trestbps": 123.5,
+      "chol": 235.42,
+      "fbs": 0.08,
+      "restecg": 0.33,
+      "thalach": 158.33,
+      "exang": 0.17,
+      "oldpeak": 0.57,
+      "slope": 1.75,
+      "ca": 0.17,
+      "thal": 5.67
+    },
+    "mean_feature_values_false_positive": {
+      "age": 58.08,
+      "sex": 0.85,
+      "cp": 3.46,
+      "trestbps": 132.54,
+      "chol": 184.23,
+      "fbs": 0.08,
+      "restecg": 0.46,
+      "thalach": 133.85,
+      "exang": 0.31,
+      "oldpeak": 0.61,
+      "slope": 1.62,
+      "ca": 0.69,
+      "thal": 5.92
+    },
+    "mean_feature_values_correct": {
+      "age": 50.97,
+      "sex": 0.74,
+      "cp": 3.18,
+      "trestbps": 133.13,
+      "chol": 198.27,
+      "fbs": 0.12,
+      "restecg": 0.56,
+      "thalach": 140.9,
+      "exang": 0.34,
+      "oldpeak": 0.82,
+      "slope": 1.86,
+      "ca": 0.27,
+      "thal": 5.26
+    }
+  },
+  "threshold_analysis": {
+    "default_threshold": 0.5,
+    "best_f1_threshold": 0.306,
+    "f1_at_default": 0.8275862068965517,
+    "f1_at_best_threshold": 0.8461538461533491,
+    "recall_at_best_threshold": 0.9166666666666666,
+    "precision_at_best_threshold": 0.7857142857142857
+  },
+  "calibration": {
+    "brier_score_uncalibrated": 0.11924439879422612,
+    "brier_score_isotonic_calibrated": 0.11102354006775655,
+    "improved": true
+  },
+  "seed_sensitivity": {
+    "seeds_tested": 10,
+    "mean_auc": 0.9075810185185185,
+    "std_auc": 0.0015394678782969821,
+    "min_auc": 0.9056712962962962,
+    "max_auc": 0.910108024691358,
+    "range": 0.0044367283950618175
+  },
+  "feature_importance": {
+    "gain_based_top5": {
+      "cp": 0.16459999978542328,
+      "exang_cp": 0.13860000669956207,
+      "ca_thal": 0.08529999852180481,
+      "exang": 0.07029999792575836,
+      "oldpeak_slope": 0.06120000034570694
+    },
+    "permutation_based_top5": {
+      "cp": 0.0483,
+      "oldpeak_slope": 0.023,
+      "chol": 0.0199,
+      "sex": 0.0096,
+      "thal": 0.008
+    },
+    "overlap_top5": 2
+  }
+}
